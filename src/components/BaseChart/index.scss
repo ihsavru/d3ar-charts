@@ -1,0 +1,39 @@
+.base {
+  &__container {
+    position: relative;
+    width: fit-content;
+    margin: 20px;
+  }
+
+  &__svg-container {
+    background-color: aliceblue;
+    cursor: pointer;
+  }
+
+  &__gridlines {
+    color: #cdebf9;
+  }
+  
+  &__axis {
+    color: #72c6ed;
+    stroke-width: 4;
+
+    &-label {
+      stroke: #72c6ed;
+      font-size: 14px;
+    }
+  }
+
+  &__tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #cdebf9;
+    color: #45b3e7;
+    border: 1px solid #45b3e7;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 10px;
+    opacity: 0;
+  }
+}

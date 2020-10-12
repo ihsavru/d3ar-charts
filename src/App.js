@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={regenerateData}>Change Data</button>
-      <LineChart
+      <BarChart
         svgProps={{
           margin: { top: 80, bottom: 80, left: 80, right: 80 },
           width: 600,
@@ -42,7 +42,7 @@ function App() {
         data={data}
         strokeWidth={4}
       />
-      <ScatterPlot
+      {/* <ScatterPlot
         svgProps={{
           margin: { top: 80, bottom: 80, left: 80, right: 80 },
           width: 600,
@@ -67,7 +67,7 @@ function App() {
         }}
         data={data}
         strokeWidth={4}
-      />
+      /> */}
     </div>
   );
 }

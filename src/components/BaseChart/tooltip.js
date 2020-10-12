@@ -1,8 +1,16 @@
 import * as d3 from 'd3';
 import classnames from 'classnames';
 
+function scaleBandInvert(scale, coord) {
+  const eachBand = scale.step();
+  const index = Math.floor((coord[0] / eachBand));
+  const val = scale.domain()[index];
+  return val;
+}
+
 function drawTooltip(config) {
   const {
+    useScaleBands,
     margin,
     width,
     height,
@@ -27,6 +35,8 @@ function drawTooltip(config) {
     .attr('r', 5)
     .attr('class', classnames(['line-chart__circle', markerClass]));
 
+  if (useScaleBands) focus.style('visibility', 'hidden');
+
   svg
     .append('rect')
     .attr('class', 'overlay')
@@ -48,7 +58,8 @@ function drawTooltip(config) {
   function mousemove(event) {
     const bisect = d3.bisector((d) => d.label).left;
     const xPos = d3.mouse(this)[0];
-    const x0 = bisect(data, xScale.invert(xPos));
+    const invertedPoint = useScaleBands ? scaleBandInvert(xScale, d3.mouse(this)) : xScale.invert(xPos);
+    const x0 = bisect(data, invertedPoint);
     const d0 = data[x0];
 
     focus.style('opacity', 1);

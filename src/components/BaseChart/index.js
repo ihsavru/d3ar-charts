@@ -6,7 +6,7 @@ import drawTooltip from './tooltip';
 
 import './index.scss';
 
-const BaseChart = drawChart =>
+const BaseChart = (drawChart, useScaleBands) =>
   function Chart(props) {
     const svgRef = React.createRef();
     const tooltipRef = React.createRef();
@@ -20,10 +20,17 @@ const BaseChart = drawChart =>
     const xMinValue = d3.min(data, (d) => d.label);
     const xMaxValue = d3.max(data, (d) => d.label);
 
-    const xScale = d3
+    let xScale = d3
       .scaleLinear()
       .domain([xMinValue, xMaxValue])
       .range([0, width]);
+
+    if (useScaleBands) {
+      xScale = d3.scaleBand()
+        .range([0, width])
+        .domain(data.map((d) => d.label))
+        .padding(0.2);
+    }
 
     const yScale = d3
       .scaleLinear()
@@ -66,6 +73,7 @@ const BaseChart = drawChart =>
       });
 
       drawTooltip({
+        useScaleBands,
         svgRef,
         tooltipRef,
         data,

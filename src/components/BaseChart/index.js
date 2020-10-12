@@ -2,6 +2,7 @@ import React, { createRef, useEffect } from 'react';
 import * as d3 from 'd3';
 import classnames from 'classnames';
 import drawAxis from './axis';
+import drawTooltip from './tooltip';
 
 import './index.scss';
 
@@ -56,6 +57,15 @@ const BaseChart = drawChart =>
       });
 
       drawChart({
+        svgRef,
+        data,
+        xScale,
+        yScale,
+        ...svgProps,
+        ...restProps,
+      });
+
+      drawTooltip({
         svgRef,
         tooltipRef,
         data,

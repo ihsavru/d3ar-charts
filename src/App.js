@@ -5,8 +5,21 @@ import BarChart from './components/BarChart';
 import PieChart from './components/PieChart';
 import DonutChart from './components/DonutChart';
 import ScatterPlot from './components/ScatterPlot';
+import HeatMap from './components/HeatMap';
 import './App.css';
 
+const heatMapdata = [];
+for (let i = 0; i < 20; i++) {
+  for (let j = 0; j < 20; j++) {
+    const depth = Math.floor(Math.random() * 20 + 3);
+    heatMapdata.push({
+      label: i,
+      value: j,
+      depth,
+      tooltipContent: `<b>x: </b>${i}<br><b>y: </b>${depth}`,
+    });
+  }
+}
 function App() {
   const [data, setData] = useState([]);
 
@@ -29,6 +42,19 @@ function App() {
   return (
     <div className="App">
       <button onClick={regenerateData}>Change Data</button>
+      <HeatMap
+        svgProps={{
+          margin: { top: 80, bottom: 80, left: 80, right: 80 },
+          width: 400,
+          height: 400,
+        }}
+        axisProps={{
+          xLabel: 'X Axis',
+          yLabel: 'Y Axis',
+        }}
+        data={heatMapdata}
+        strokeWidth={4}
+      />
       <BarChart
         svgProps={{
           margin: { top: 80, bottom: 80, left: 80, right: 80 },

@@ -6,11 +6,12 @@ import drawTooltip from './tooltip';
 
 import './index.scss';
 
-const BaseChart = (drawChart, useScaleBands) =>
+const BaseChart = (drawChart, extraProps) => {
   function Chart(props) {
     const svgRef = React.createRef();
     const tooltipRef = React.createRef();
-    const { axisProps, data, svgProps, tooltipClass, ...restProps } = props;
+    const { axisProps, data, svgProps, tooltipClass, scaleBandPadding, ...restProps } = props;
+    const { useScaleBands } = extraProps;
 
     const { margin, width, height, svgContainerClass } = svgProps;
 
@@ -25,17 +26,24 @@ const BaseChart = (drawChart, useScaleBands) =>
       .domain([xMinValue, xMaxValue])
       .range([0, width]);
 
-    if (useScaleBands) {
+    if (useScaleBands.x) {
       xScale = d3.scaleBand()
         .range([0, width])
         .domain(data.map((d) => d.label))
-        .padding(0.2);
+        .padding(scaleBandPadding);
     }
 
-    const yScale = d3
+    let yScale = d3
       .scaleLinear()
       .range([height, 0])
       .domain([0, yMaxValue]);
+
+    if (useScaleBands.y) {
+      yScale = d3.scaleBand()
+        .range([height, 0])
+        .domain(data.map((d) => d.value))
+        .padding(scaleBandPadding);
+    }
 
     useEffect(() => {
       flushChart();
@@ -57,6 +65,7 @@ const BaseChart = (drawChart, useScaleBands) =>
       drawAxis({
         ...axisProps,
         ...svgProps,
+        ...extraProps,
         data,
         svgRef,
         xScale,
@@ -95,4 +104,10 @@ const BaseChart = (drawChart, useScaleBands) =>
     )
   }
 
+  Chart.defaultProps = {
+    scaleBandPadding: 0.05,
+  }
+
+  return Chart;
+}
 export default BaseChart;

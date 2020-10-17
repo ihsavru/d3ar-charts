@@ -29,5 +29,8 @@ function drawBarChart(props) {
     .attr('height', (d) => height - yScale(d.value));
 }
 
-const useScaleBands = true;
-export default BaseChart(drawBarChart, useScaleBands);
+const extraProps = {
+  useScaleBands: { x: true, y: false },
+};
+
+export default BaseChart(drawBarChart, extraProps);

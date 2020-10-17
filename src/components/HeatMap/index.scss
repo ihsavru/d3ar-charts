@@ -1,0 +1,5 @@
+.heatmap {
+  &__axis .tick line, &__axis .domain {
+    visibility: hidden;
+  }
+}

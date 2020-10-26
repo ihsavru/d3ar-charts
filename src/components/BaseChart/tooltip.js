@@ -1,12 +1,6 @@
 import * as d3 from 'd3';
 import classnames from 'classnames';
-
-function scaleBandInvert(scale, coord) {
-  const eachBand = scale.step();
-  const index = Math.floor((coord[0] / eachBand));
-  const val = scale.domain()[index];
-  return val;
-}
+import { scaleBandInvert } from '../../utils/invertScale';
 
 function drawTooltip(config) {
   const {
@@ -20,6 +14,7 @@ function drawTooltip(config) {
     markerClass,
     xScale,
     yScale,
+    findHoverData,
   } = config;
 
   const svg = d3.select(svgRef.current).select('g');
@@ -55,12 +50,12 @@ function drawTooltip(config) {
     })
     .on('mousemove', mousemove);
 
-  function mousemove(event) {
+  function mousemove() {
     const bisect = d3.bisector((d) => d.label).left;
     const xPos = d3.mouse(this)[0];
-    const invertedPoint = useScaleBands ? scaleBandInvert(xScale, d3.mouse(this)) : xScale.invert(xPos);
+    const invertedPoint = useScaleBands ? scaleBandInvert(xScale, xPos) : xScale.invert(xPos);
     const x0 = bisect(data, invertedPoint);
-    const d0 = data[x0];
+    const d0 = findHoverData ? findHoverData(d3.mouse(this), height, data, xScale, yScale) : data[x0];
 
     focus.style('opacity', 1);
 

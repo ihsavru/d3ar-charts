@@ -16,7 +16,7 @@ for (let i = 0; i < 20; i++) {
       label: i,
       value: j,
       depth,
-      tooltipContent: `<b>x: </b>${i}<br><b>y: </b>${depth}`,
+      tooltipContent: `<b>x: </b>${i}<br><b>y: </b>${j}<br><b>depth: </b>${depth}`,
     });
   }
 }

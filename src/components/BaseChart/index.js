@@ -11,7 +11,7 @@ const BaseChart = (drawChart, extraProps) => {
     const svgRef = React.createRef();
     const tooltipRef = React.createRef();
     const { axisProps, data, svgProps, tooltipClass, scaleBandPadding, ...restProps } = props;
-    const { useScaleBands } = extraProps;
+    const { useScaleBands, findHoverData } = extraProps;
 
     const { margin, width, height, svgContainerClass } = svgProps;
 
@@ -88,6 +88,7 @@ const BaseChart = (drawChart, extraProps) => {
         data,
         xScale,
         yScale,
+        findHoverData,
         ...svgProps,
         ...restProps,
       });

@@ -1,6 +1,7 @@
 import BaseChart from '../BaseChart';
 import classnames from 'classnames';
 import * as d3 from 'd3';
+import { scaleBandInvert } from '../../utils/invertScale';
 
 import './index.scss';
 
@@ -37,6 +38,15 @@ function drawHeatMap(props) {
     .style("fill", function(d) { return colorScale(d.depth)} );
 }
 
+function findHoverData(event, height, data, xScale, yScale) {
+  const [xPos, yPos] = event;
+  const xInvertedPoint = scaleBandInvert(xScale, xPos);
+  const yInvertedPoint = scaleBandInvert(yScale, height - yPos);
+
+  const d0 = data.filter(({ label, value }) => label === xInvertedPoint && value === yInvertedPoint)[0];
+  return d0;
+}
+
 const useScaleBands = { x: true, y: true };
 const extraProps = {
   useScaleBands,
@@ -44,6 +54,7 @@ const extraProps = {
   drawYGridlines: false,
   xLabel: '',
   yLabel: '',
-  axisClass: 'heatmap__axis'
+  axisClass: 'heatmap__axis',
+  findHoverData,
 }
 export default BaseChart(drawHeatMap, extraProps);

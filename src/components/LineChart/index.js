@@ -35,4 +35,8 @@ function drawLineChart(props) {
     .attr('class', classnames(['line-chart__path', lineClass]));
 }
 
-export default BaseChart(drawLineChart);
+const extraProps = {
+  useScaleBands: { x: false, y: false },
+};
+
+export default BaseChart(drawLineChart, extraProps);

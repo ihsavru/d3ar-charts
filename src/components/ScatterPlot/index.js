@@ -30,4 +30,8 @@ function drawScatterPlot(props) {
     .attr('class', classnames(['scatter-plot__point', pointClass]));
 }
 
-export default BaseChart(drawScatterPlot);
+const extraProps = {
+  useScaleBands: { x: true, y: false },
+};
+
+export default BaseChart(drawScatterPlot, extraProps);

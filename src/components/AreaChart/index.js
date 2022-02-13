@@ -35,4 +35,8 @@ function drawAreaChart(props) {
       .y1((d) => yScale(d.value)));
 }
 
-export default BaseChart(drawAreaChart);
+const extraProps = {
+  useScaleBands: { x: true, y: false },
+};
+
+export default BaseChart(drawAreaChart, extraProps);

@@ -9,9 +9,6 @@ function PieChart(props) {
     pieSize,
     svgSize,
     data,
-    tooltipClass,
-    strokeWidth,
-    strokeColour,
     containerId,
     innerRadius,
   } = props;

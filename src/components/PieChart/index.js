@@ -120,7 +120,7 @@ function PieChart(props) {
     const label = d3
       .arc()
       .outerRadius(outerRadius)
-      .innerRadius(0);
+      .innerRadius(innerRadius);
     const text = arc
       .append('text')
       .attr('text-anchor', 'middle')

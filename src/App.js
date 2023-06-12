@@ -72,7 +72,7 @@ function App() {
         data={data}
         pieSize={400}
         svgSize={500}
-        innerRadius={50}
+        innerRadius={100}
         containerId="pie"
       />
       <ScatterPlot

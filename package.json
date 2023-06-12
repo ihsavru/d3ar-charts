@@ -8,10 +8,10 @@
     "@testing-library/user-event": "^7.1.2",
     "classnames": "2.2.6",
     "d3": "5.16.0",
-    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "sass": "^1.63.3"
   },
   "scripts": {
     "start": "react-scripts start",

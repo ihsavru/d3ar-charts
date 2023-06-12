@@ -68,7 +68,14 @@ function App() {
         data={data}
         strokeWidth={4}
       />
-      {/* <ScatterPlot
+      <PieChart
+        data={data}
+        pieSize={400}
+        svgSize={500}
+        innerRadius={50}
+        containerId="pie"
+      />
+      <ScatterPlot
         svgProps={{
           margin: { top: 80, bottom: 80, left: 80, right: 80 },
           width: 600,
@@ -93,7 +100,7 @@ function App() {
         }}
         data={data}
         strokeWidth={4}
-      /> */}
+      />
     </div>
   );
 }

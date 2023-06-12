@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  javascript:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src

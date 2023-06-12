@@ -101,6 +101,19 @@ function App() {
         data={data}
         strokeWidth={4}
       />
+      <LineChart
+        svgProps={{
+          margin: { top: 80, bottom: 80, left: 80, right: 80 },
+          width: 600,
+          height: 400,
+        }}
+        axisProps={{
+          xLabel: 'X Axis',
+          yLabel: 'Y Axis',
+        }}
+        data={data}
+        strokeWidth={4}
+      />
     </div>
   );
 }

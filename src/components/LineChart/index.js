@@ -36,7 +36,7 @@ function drawLineChart(props) {
 }
 
 const extraProps = {
-  useScaleBands: { x: false, y: false },
+  useScaleBands: { x: true, y: false },
 };
 
 export default BaseChart(drawLineChart, extraProps);
